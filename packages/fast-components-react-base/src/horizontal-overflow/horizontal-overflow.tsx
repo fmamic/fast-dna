@@ -8,6 +8,8 @@ import {
 import { getClientRectWithMargin } from "@microsoft/fast-web-utilities";
 import { Direction } from "@microsoft/fast-application-utilities";
 import Foundation, { HandledProps } from "@microsoft/fast-components-foundation-react";
+import { ResizeObserver } from "./resize-observer";
+import { ResizeObserverEntry } from "./resize-observer-entry";
 import {
     HorizontalOverflowChange,
     HorizontalOverflowHandledProps,
@@ -16,8 +18,6 @@ import {
     ScrollChange,
 } from "./horizontal-overflow.props";
 import throttle from "raf-throttle";
-import { ResizeObserver } from "resize-observer";
-import { ResizeObserverEntry } from "resize-observer/lib/ResizeObserverEntry";
 
 export enum ButtonDirection {
     previous = "previous",
