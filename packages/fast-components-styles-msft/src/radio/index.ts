@@ -91,8 +91,14 @@ const styles: ComponentStyles<RadioClassNameContract, DesignSystem> = (
                 ...toggleFieldPattern.rest.stateIndicator.unchecked,
             },
         },
+        radio_label: {
+            ...toggleFieldPattern.rest.text,
+            [applyLocalizedProperty("paddingLeft", "paddingRight", direction)]: "8px",
+        },
         radio__disabled: {
-            cursor: "not-allowed",
+            "& $radio_label, & $radio_stateIndicator, & $radio_input": {
+                cursor: "not-allowed",
+            },
             "& $radio_input": {
                 ...outlinePattern.disabled,
                 "&:checked": {
@@ -102,13 +108,8 @@ const styles: ComponentStyles<RadioClassNameContract, DesignSystem> = (
                 },
             },
             "& $radio_label": {
-                cursor: "not-allowed",
                 ...toggleFieldPattern.disabled.text,
             },
-        },
-        radio_label: {
-            ...toggleFieldPattern.rest.text,
-            [applyLocalizedProperty("marginLeft", "marginRight", direction)]: "8px",
         },
     };
 };

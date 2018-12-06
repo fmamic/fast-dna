@@ -99,7 +99,7 @@ const styles: ComponentStyles<CheckboxClassNameContract, DesignSystem> = (
                 backgroundColor
             ),
             ...applyTypeRampConfig("t7"),
-            [applyLocalizedProperty("marginLeft", "marginRight", direction)]: "8px",
+            [applyLocalizedProperty("paddingLeft", "paddingRight", direction)]: "8px",
         },
         checkbox__checked: {
             "& $checkbox_stateIndicator": {
@@ -129,7 +129,9 @@ const styles: ComponentStyles<CheckboxClassNameContract, DesignSystem> = (
             },
         },
         checkbox__disabled: {
-            cursor: "not-allowed",
+            "& $checkbox_input, & $checkbox_label,": {
+                cursor: "not-allowed",
+            },
             "& $checkbox_input": {
                 ...outlinePattern.disabled,
             },
