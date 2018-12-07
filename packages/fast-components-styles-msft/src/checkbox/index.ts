@@ -19,7 +19,8 @@ import {
     normalContrast,
 } from "../utilities/colors";
 import outlinePattern from "../patterns/outline";
-import toggleFieldPattern from "../patterns/toggle-field";
+import switchFieldPattern from "../patterns/switch-field";
+import typographyPattern from "../patterns/typography";
 
 const styles: ComponentStyles<CheckboxClassNameContract, DesignSystem> = (
     config: DesignSystem
@@ -28,14 +29,6 @@ const styles: ComponentStyles<CheckboxClassNameContract, DesignSystem> = (
     const backgroundColor: string = designSystem.backgroundColor;
     const foregroundColor: string = designSystem.foregroundColor;
     const direction: Direction = designSystem.direction;
-    const checkboxColor: any = toggleFieldPattern.rest.stateIndicator.checked.background(
-        designSystem
-    );
-    const checkboxDisabled: string = disabledContrast(
-        designSystem.contrast,
-        foregroundColor,
-        backgroundColor
-    );
 
     return {
         checkbox: {
@@ -93,11 +86,7 @@ const styles: ComponentStyles<CheckboxClassNameContract, DesignSystem> = (
             },
         },
         checkbox_label: {
-            color: ensureNormalContrast(
-                designSystem.contrast,
-                foregroundColor,
-                backgroundColor
-            ),
+            ...typographyPattern.rest,
             ...applyTypeRampConfig("t7"),
             [applyLocalizedProperty("paddingLeft", "paddingRight", direction)]: "8px",
         },
@@ -108,7 +97,7 @@ const styles: ComponentStyles<CheckboxClassNameContract, DesignSystem> = (
                     zIndex: "1",
                     content: '""',
                     borderRadius: toPx(designSystem.cornerRadius),
-                    ...toggleFieldPattern.rest.stateIndicator.checked,
+                    ...switchFieldPattern.rest.stateIndicator,
                 },
             },
         },
@@ -121,7 +110,7 @@ const styles: ComponentStyles<CheckboxClassNameContract, DesignSystem> = (
                     top: "5px",
                     height: "10px",
                     width: "10px",
-                    ...toggleFieldPattern.rest.stateIndicator.checked,
+                    ...switchFieldPattern.rest.stateIndicator,
                 },
                 "&::after": {
                     content: "none",
@@ -135,13 +124,15 @@ const styles: ComponentStyles<CheckboxClassNameContract, DesignSystem> = (
             "& $checkbox_input": {
                 ...outlinePattern.disabled,
             },
-            "& $checkbox_stateIndicator": {
-                "&::after, &::before": {
-                    ...toggleFieldPattern.disabled.stateIndicator.checked,
+            "&$checkbox__checked": {
+                "& $checkbox_stateIndicator": {
+                    "&::after, &::before": {
+                        ...switchFieldPattern.disabled.stateIndicator,
+                    },
                 },
             },
             "& $checkbox_label": {
-                color: checkboxDisabled,
+                ...typographyPattern.disabled,
             },
         },
     };
